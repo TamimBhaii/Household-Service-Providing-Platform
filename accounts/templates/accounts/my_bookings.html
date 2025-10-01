@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}My Bookings{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-10">
+  <h2 class="text-3xl font-bold mb-8 text-gray-800">My Bookings</h2>
+
+  {% if bookings %}
+    <div class="space-y-6">
+      {% for booking in bookings %}
+      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition border-l-4 
+                  {% if booking.status == 'pending' %}border-yellow-400
+                  {% elif booking.status == 'accepted' %}border-green-500
+                  {% elif booking.status == 'rejected' %}border-red-500
+                  {% elif booking.status == 'completed' %}border-blue-500
+                  {% else %}border-gray-400{% endif %}">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-3">
+          <a href="{% url 'services:service_detail' booking.service.id %}" 
+             class="text-xl font-semibold text-blue-600 hover:underline">
+            {{ booking.service.title }}
+          </a>
+          <span class="text-sm text-gray-500">{{ booking.created_at|date:"M d, Y H:i" }}</span>
+        </div>
+
+        <!-- Provider -->
+        <p class="text-sm mb-2">
+          <span class="font-semibold text-gray-700">Provider:</span> {{ booking.provider.full_name }}
+        </p>
+
+        <!-- Status -->
+        <p class="mb-4">
+          <span class="font-semibold text-gray-700">Status:</span>
+          {% if booking.status == "pending" %}
+            <span class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded">Pending</span>
+          {% elif booking.status == "accepted" %}
+            <span class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">Accepted</span>
+          {% elif booking.status == "rejected" %}
+            <span class="px-2 py-1 text-xs bg-red-100 text-red-700 rounded">Rejected</span>
+          {% elif booking.status == "completed" %}
+            <span class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">Completed</span>
+          {% elif booking.status == "cancelled" %}
+            <span class="px-2 py-1 text-xs bg-gray-200 text-gray-600 rounded">Cancelled</span>
+          {% endif %}
+        </p>
+
+        <!-- Cancel button if pending -->
+        {% if booking.status == "pending" %}
+          <form method="post" action="{% url 'bookings:cancel_booking' booking.id %}">
+            {% csrf_token %}
+            <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
+              Cancel Booking
+            </button>
+          </form>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-gray-500">You haven’t made any bookings yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

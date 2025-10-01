@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Customer Dashboard{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto pt-24 pb-10 text-center">
+  <!-- Profile Section -->
+  <div class="bg-white shadow rounded-lg p-6 mb-8 flex flex-col items-center">
+    {% if request.user.profile_image %}
+      <img src="{{ request.user.profile_image.url }}" 
+           alt="Profile" 
+           class="rounded-full object-cover border-2 border-green-500 mb-4"
+           style="width:80px; height:80px;">
+    {% else %}
+      <div class="rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-4"
+           style="width:80px; height:80px;">
+        No Img
+      </div>
+    {% endif %}
+
+    <h2 class="text-2xl font-bold">{{ request.user.full_name|default:request.user.email }}</h2>
+    <p class="text-gray-600 mb-6">Customer</p>
+
+    <!-- Action Buttons -->
+    <div class="flex gap-4 justify-center">
+      <a href="{% url 'accounts:edit_profile' %}" 
+         class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+         Edit Profile
+      </a>
+      <a href="{% url 'accounts:password_change' %}" 
+         class="px-4 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition">
+         Change Password
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

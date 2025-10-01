@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div class="w-full max-w-5xl flex bg-white rounded-lg shadow-lg overflow-hidden">
+
+    <!-- Left side image (white background, no shadow) -->
+    <div class="hidden md:flex w-1/2 items-center justify-center bg-white p-6">
+      <img src="{% static 'images/signup.jpg' %}" alt="Signup" class="rounded-lg object-cover max-h-[500px] w-full">
+    </div>
+
+    <!-- Right side form -->
+    <div class="w-full md:w-1/2 p-10">
+      <h1 class="text-2xl font-extrabold text-center mb-1">Create a Provider Account</h1>
+
+      <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <!-- full name -->
+        <div>
+          {{ form.full_name }}
+          {% if form.full_name.errors %}
+            <p class="text-red-500 text-xs mt-1">{{ form.full_name.errors|striptags }}</p>
+          {% endif %}
+        </div>
+
+        <!-- email + phone -->
+        <div>{{ form.email }}</div>
+        <div>{{ form.phone }}</div>
+
+        <div>{{ form.district }}</div>
+        <div>{{ form.thana }}</div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>{{ form.village }}</div>
+          <div>{{ form.holding_no }}</div>
+        </div>
+
+        <div>{{ form.bio }}</div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>{{ form.password1 }}</div>
+          <div>{{ form.password2 }}</div>
+        </div>
+
+        <div>{{ form.profile_image }}</div>
+
+        <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold shadow-md hover:bg-green-700">
+          Sign Up
+        </button>
+      </form>
+
+      <p class="mt-6 text-center text-sm">
+        Already have an account?
+        <a href="{% url 'accounts:login' %}?role=provider" class="text-blue-600 font-semibold hover:underline">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

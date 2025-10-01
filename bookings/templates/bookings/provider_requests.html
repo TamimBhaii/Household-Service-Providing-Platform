@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Hire Requests{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-10">
+  <h2 class="text-3xl font-bold mb-8 text-gray-800">Hire Requests</h2>
+
+  {% if bookings %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for booking in bookings %}
+      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-2xl transition duration-300">
+
+        <!-- Customer info -->
+        <div class="flex items-center gap-4 mb-4">
+          {% if booking.customer.profile_image %}
+            <img src="{{ booking.customer.profile_image.url }}" class="w-14 h-14 rounded-full object-cover border-2 border-blue-500 shadow">
+          {% else %}
+            <div class="w-14 h-14 rounded-full bg-gray-300 flex items-center justify-center text-gray-500 font-bold">N/A</div>
+          {% endif %}
+          <div>
+            <p class="font-semibold text-lg">{{ booking.customer.full_name }}</p>
+            <p class="text-sm text-gray-500">{{ booking.customer.email }}</p>
+          </div>
+        </div>
+
+        <!-- Service info -->
+        <p class="mb-2"><span class="font-semibold text-gray-700">Service:</span> {{ booking.service.title }}</p>
+        <p class="text-gray-600 text-sm mb-4 italic">“{{ booking.note|default:"No note provided" }}”</p>
+
+        <!-- Status -->
+        <p class="mb-4">
+          <span class="font-semibold text-gray-700">Status:</span> 
+          {% if booking.status == "pending" %}
+            <span class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded">Pending</span>
+          {% elif booking.status == "accepted" %}
+            <span class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">Accepted</span>
+          {% elif booking.status == "rejected" %}
+            <span class="px-2 py-1 text-xs bg-red-100 text-red-700 rounded">Rejected</span>
+          {% elif booking.status == "completed" %}
+            <span class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">Completed</span>
+          {% endif %}
+        </p>
+
+        <!-- Actions -->
+        {% if booking.status == "pending" %}
+          <div class="flex gap-3">
+            <form method="post" action="{% url 'bookings:update_status' booking.id 'accepted' %}">
+              {% csrf_token %}
+              <button class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition">Accept</button>
+            </form>
+            <form method="post" action="{% url 'bookings:update_status' booking.id 'rejected' %}">
+              {% csrf_token %}
+              <button class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition">Reject</button>
+            </form>
+          </div>
+        {% endif %}
+
+        <!-- Link to full customer details -->
+        <div class="mt-4">
+          <button onclick="toggleDetails('details-{{ booking.id }}')" 
+                  class="text-blue-600 hover:text-blue-800 underline text-sm">
+            View Customer Details
+          </button>
+        </div>
+
+        <!-- Hidden customer details -->
+        <div id="details-{{ booking.id }}" class="hidden mt-3 text-sm bg-gray-50 rounded-lg p-3 shadow-inner">
+          <p><strong>Phone:</strong> {{ booking.customer_phone }}</p>
+          <p><strong>District:</strong> {{ booking.customer_district }}</p>
+          <p><strong>Thana:</strong> {{ booking.customer_thana }}</p>
+          <p><strong>Village:</strong> {{ booking.customer_village }}</p>
+          <p><strong>Holding No:</strong> {{ booking.customer_holding_no }}</p>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-gray-500">No hire requests found.</p>
+  {% endif %}
+</div>
+
+<script>
+  function toggleDetails(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle("hidden");
+  }
+</script>
+{% endblock %}

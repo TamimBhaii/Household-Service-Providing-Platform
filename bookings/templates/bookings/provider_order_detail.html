@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto mt-6 p-6 bg-white rounded shadow">
+  <h2 class="text-2xl mb-4">Order Detail</h2>
+  <div><strong>Service:</strong> {{ order.service.title }}</div>
+  <div><strong>Customer:</strong> {{ order.customer.email }}</div>
+  <div><strong>Phone:</strong> {{ order.customer_phone }}</div>
+  <div><strong>Address:</strong> {{ order.customer_district }}, {{ order.customer_upazila }}, {{ order.customer_village }}</div>
+  <div><strong>Requested at:</strong> {{ order.requested_datetime }}</div>
+  <div class="mt-4">
+    <form method="post" action="{% url 'bookings:provider_order_action' order.pk %}">
+      {% csrf_token %}
+      <button name="action" value="accept" class="px-3 py-2 bg-green-600 text-white rounded">Accept</button>
+      <button name="action" value="reject" class="px-3 py-2 bg-red-600 text-white rounded">Reject</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

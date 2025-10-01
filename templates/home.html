@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar %} 
+<!-- Transparent Navbar -->
+<nav class="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-10">
+  <a href="{% url 'home' %}">
+    <div class="flex items-center space-x-2">
+      <img src="{% static 'images/logo2.png' %}" alt="Logo" class="h-8 w-8">
+      <h1 class="text-2xl font-bold text-blue-600 drop-shadow-lg">HouseHold Services</h1>
+    </div>
+  </a>
+
+  <div>
+    <a href="#about" 
+       class="px-4 py-2 bg-transparent border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition">
+       About Us
+    </a>
+  </div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative flex items-center justify-end px-12 py-20 bg-cover bg-center"
+         style="background-image: url('{% static 'images/background2.png' %}'); min-height: 100vh;">
+  
+  <!-- Dark overlay -->
+  {% comment %} <div class="absolute inset-0 bg-black bg-opacity-50"></div> {% endcomment %}
+
+  <!-- Right side text -->
+<div class="relative max-w-lg mt-20 z-10 text-left mx-auto md:mx-0">
+  <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Your Home, Our Responsibility</h2>
+  <p class="text-lg md:text-xl font-semibold mb-6">We deliver trusted household services with professionalism and care.</p>
+  <p class="text-base mb-6">
+    From cleaning to repairs, our skilled providers ensure your comfort, safety, and peace of mind — every time.
+  </p>
+
+  <div class="flex gap-4 justify-center md:justify-start">
+          <a href="{% url 'accounts:login' %}?role=customer"
+         class="px-6 py-3 bg-green-600 text-white rounded-lg text-lg shadow hover:bg-red-700">
+         Join as Customer
+      </a> 
+          <a href="{% url 'accounts:login' %}?role=provider"
+         class="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg shadow hover:bg-red-700">
+         Join as Professional
+      </a> 
+  </div>
+</div>
+
+</section>
+
+
+
+<!-- ✅ Household Service Cards -->
+<section class="bg-gray-50 py-20">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Section title with spacing from hero -->
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+      Explore Our Household Services
+    </h2>
+
+    <!-- Card 1: Text Left, Image Right -->
+    <div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+        <!-- Left: Text -->
+        <div class="md:w-1/2">
+          <h3 class="text-2xl font-semibold mb-3">Cleaning Services</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Professional cleaning solutions ensuring spotless and fresh living spaces every day.
+            Our trained teams use safe products and careful handling to make your home shine.
+          </p>
+        </div>
+
+        <!-- Right: Fixed-size image block -->
+        <div class="md:w-1/2 flex justify-end">
+          <!-- image container has fixed width/height to keep layout consistent -->
+          <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+            <img src="{% static 'images/cleaning-home.jpg' %}" alt="Cleaning"
+                 class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Image Left, Text Right -->
+<!-- Card 2: Image Left, Text Right -->
+<div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+    
+    <!-- Left: Fixed-size image block -->
+    <div class="md:w-1/2 flex justify-start">
+      <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+        <img src="{% static 'images/Plumbing Services.jpg' %}" alt="Plumbing"
+             class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Right: Text -->
+    <div class="md:w-1/2">
+      <h3 class="text-2xl font-semibold mb-3">Plumbing Services</h3>
+      <p class="text-gray-600 leading-relaxed">
+        Expert plumbers available for installations, leak fixing, and maintenance support.
+        Fast response, transparent pricing and quality workmanship for all kinds of plumbing jobs.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+    <!-- (Optional) You can duplicate the pattern above for more cards.
+         Alternate between md:flex-row (text left) and md:flex-row-reverse (text right) -->
+
+
+    <!-- Card 1: Text Left, Image Right -->
+    <div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+        <!-- Left: Text -->
+        <div class="md:w-1/2">
+          <h3 class="text-2xl font-semibold mb-3">Home Sanitization Specialist</h3>
+          <p class="text-gray-600 leading-relaxed">
+Focused on creating a visibly clean and genuinely healthy environment. We use hospital-grade standards for kitchen and bathroom sanitization, focusing on high-germ areas and touchpoints to maximize hygiene and minimize illness. Clean to the highest standard of health.          </p>
+        </div>
+
+        <!-- Right: Fixed-size image block -->
+        <div class="md:w-1/2 flex justify-end">
+          <!-- image container has fixed width/height to keep layout consistent -->
+          <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+            <img src="{% static 'images/Home Sanitization Specialist.jpg' %}" alt="Cleaning"
+                 class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Image Left, Text Right -->
+<!-- Card 2: Image Left, Text Right -->
+<div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+    
+    <!-- Left: Fixed-size image block -->
+    <div class="md:w-1/2 flex justify-start">
+      <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+        <img src="{% static 'images/Maintenance & Repair.jpg' %}" alt="Plumbing"
+             class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Right: Text -->
+    <div class="md:w-1/2">
+      <h3 class="text-2xl font-semibold mb-3">Maintenance & Repair</h3>
+      <p class="text-gray-600 leading-relaxed">
+        Dedicated to high-quality craftsmanship in all home repairs and improvements. Specializing in drywall, minor electrical, plumbing fixes, and furniture assembly. Get it done right the first time. Free estimate available.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <!-- Card 1: Text Left, Image Right -->
+    <div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+        <!-- Left: Text -->
+        <div class="md:w-1/2">
+          <h3 class="text-2xl font-semibold mb-3">Electrical Services</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Your safety is our priority. Certified electrician for all residential needs: panel upgrades, smart home installation, wiring, and fixture replacement. Safe, compliant, and up-to-code work, guaranteed.
+          </p>
+        </div>
+
+        <!-- Right: Fixed-size image block -->
+        <div class="md:w-1/2 flex justify-end">
+          <!-- image container has fixed width/height to keep layout consistent -->
+          <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+            <img src="{% static 'images/Electrical Services.jpg' %}" alt="Cleaning"
+                 class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Image Left, Text Right -->
+<!-- Card 2: Image Left, Text Right -->
+<div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+    
+    <!-- Left: Fixed-size image block -->
+    <div class="md:w-1/2 flex justify-start">
+      <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+        <img src="{% static 'images/AC & HVAC Repair.jpg' %}" alt="Plumbing"
+             class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Right: Text -->
+    <div class="md:w-1/2">
+      <h3 class="text-2xl font-semibold mb-3">AC & HVAC Repair</h3>
+      <p class="text-gray-600 leading-relaxed">
+        Expert service for all your heating and cooling needs. Specializing in fast AC repair, system diagnostics, and proactive maintenance to keep your home comfortable and efficient. 24-hour emergency service available.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <!-- Card 1: Text Left, Image Right -->
+    <div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+        <!-- Left: Text -->
+        <div class="md:w-1/2">
+          <h3 class="text-2xl font-semibold mb-3">Water Line/Drain Cleaning</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Specializing in deep water line and drain cleaning to prevent clogs and ensure crystal-clear water flow. We use advanced, non-invasive techniques to tackle mineral buildup and sediment. Say goodbye to slow drains!
+          </p>
+        </div>
+
+        <!-- Right: Fixed-size image block -->
+        <div class="md:w-1/2 flex justify-end">
+          <!-- image container has fixed width/height to keep layout consistent -->
+          <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+            <img src="{% static 'images/Water LineDrain Cleaning.jpg' %}" alt="Cleaning"
+                 class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Image Left, Text Right -->
+<!-- Card 2: Image Left, Text Right -->
+<div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+    
+    <!-- Left: Fixed-size image block -->
+    <div class="md:w-1/2 flex justify-start">
+      <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+        <img src="{% static 'images/Exterior Painting.jpg' %}" alt="Plumbing"
+             class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Right: Text -->
+    <div class="md:w-1/2">
+      <h3 class="text-2xl font-semibold mb-3">Interior/Exterior Painting</h3>
+      <p class="text-gray-600 leading-relaxed">
+        Transform your space with a fresh coat of paint! Providing meticulous interior and exterior painting with high-quality, durable finishes. We offer color consultation and a clean, timely process. Your vision, perfectly applied.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <!-- Card 1: Text Left, Image Right -->
+    <div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+        <!-- Left: Text -->
+        <div class="md:w-1/2">
+          <h3 class="text-2xl font-semibold mb-3">Window Washing</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Bring the light back into your home! We deliver streak-free window washing for all heights and types, enhancing your view and boosting curb appeal. We also clean screens and sills. 100% sparkle guarantee.
+          </p>
+        </div>
+
+        <!-- Right: Fixed-size image block -->
+        <div class="md:w-1/2 flex justify-end">
+          <!-- image container has fixed width/height to keep layout consistent -->
+          <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+            <img src="{% static 'images/Window Washing.jpg' %}" alt="Cleaning"
+                 class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Image Left, Text Right -->
+<!-- Card 2: Image Left, Text Right -->
+<div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+    
+    <!-- Left: Fixed-size image block -->
+    <div class="md:w-1/2 flex justify-start">
+      <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+        <img src="{% static 'images/Cooking  Meal Prep.jpg' %}" alt="Plumbing"
+             class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Right: Text -->
+    <div class="md:w-1/2">
+      <h3 class="text-2xl font-semibold mb-3">Cooking / Meal Prep</h3>
+      <p class="text-gray-600 leading-relaxed">
+        Enjoy healthy, delicious, and customized meals in the comfort of your home. I provide weekly meal planning, grocery shopping, and in-home preparation tailored to your diet and taste. Perfect for busy families or specific dietary needs.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <!-- Card 1: Text Left, Image Right -->
+    <div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+        <!-- Left: Text -->
+        <div class="md:w-1/2">
+          <h3 class="text-2xl font-semibold mb-3">Laundry & Dress Washing</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Reclaim your laundry room! Offering personalized wash, fold, and pressing services with expert care for all fabrics, including delicates and linens. Your clothes returned fresh, perfectly folded, and ready to wear.
+          </p>
+        </div>
+
+        <!-- Right: Fixed-size image block -->
+        <div class="md:w-1/2 flex justify-end">
+          <!-- image container has fixed width/height to keep layout consistent -->
+          <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+            <img src="{% static 'images/Laundry Dress Washing.jpg' %}" alt="Cleaning"
+                 class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Image Left, Text Right -->
+<!-- Card 2: Image Left, Text Right -->
+<div class="border border-gray-200 rounded-lg p-6 mb-8 bg-white shadow-sm">
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+    
+    <!-- Left: Fixed-size image block -->
+    <div class="md:w-1/2 flex justify-start">
+      <div class="w-80 h-48 rounded-lg overflow-hidden shadow-md">
+        <img src="{% static 'images/Lawn Mowing & Edging.jpg' %}" alt="Plumbing"
+             class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Right: Text -->
+    <div class="md:w-1/2">
+      <h3 class="text-2xl font-semibold mb-3">Lawn Mowing & Edging</h3>
+      <p class="text-gray-600 leading-relaxed">
+        Expert plumbers available for installations, leak fixing, and maintenance support.
+        Fast response, transparent pricing and quality workmanship for all kinds of plumbing jobs.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+  </div>
+</section>
+
+
+{% endblock %}

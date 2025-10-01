@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <body style="font-family: Arial, sans-serif; background:#f9f9f9; padding:20px;">
+    <div style="max-width:600px; margin:auto; background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      
+      <h2 style="color:#2563eb; text-align:center; margin-bottom:20px;">
+        🔑 Household Service Platform
+      </h2>
+
+      <p>Hello {{ user.full_name|default:user.email }},</p>
+      <p>
+        Thank you for signing up. Please click the button below to activate your account:
+      </p>
+
+      <p style="text-align:center; margin:30px 0;">
+        <a href="{{ activate_url }}" 
+           style="background:#2563eb; color:white; padding:12px 24px; border-radius:6px; text-decoration:none; font-weight:bold; display:inline-block;">
+          Activate Account
+        </a>
+      </p>
+
+      <p>If you didn’t sign up, please ignore this email.</p>
+
+      <hr style="margin:30px 0; border:none; border-top:1px solid #eee;">
+      <p style="color:gray; font-size:12px; text-align:center;">
+        &copy; 2025 Household Service Platform. All rights reserved.
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}{{ service.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-6 pt-24 pb-12">
+
+  <!-- Service Header -->
+  <div class="bg-white shadow rounded-xl overflow-hidden mb-8">
+    {% if service.image %}
+      <img src="{{ service.image.url }}" alt="{{ service.title }}" class="w-full h-64 object-cover">
+    {% else %}
+      <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+        No Image
+      </div>
+    {% endif %}
+    <div class="p-6">
+      <h1 class="text-3xl font-bold text-gray-800">{{ service.title }}</h1>
+      <p class="mt-2 text-gray-600">{{ service.description }}</p>
+      <div class="mt-4 flex gap-6 text-sm text-gray-700">
+        <span><strong>Price:</strong> {{ service.price }} ৳</span>
+        <span><strong>Duration:</strong> {{ service.duration_hours }} hours</span>
+        <span><strong>Location:</strong> {{ service.district }}{% if service.upazila %}, {{ service.upazila }}{% endif %}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Provider Info -->
+  <div class="bg-white shadow-md rounded-xl p-6 flex items-center gap-6 mb-8">
+    {% if provider.profile_image %}
+      <img src="{{ provider.profile_image.url }}" 
+           class="w-20 h-20 rounded-full object-cover border-2 border-blue-500">
+    {% else %}
+      <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+        No Img
+      </div>
+    {% endif %}
+
+    <div>
+      <h2 class="text-xl font-semibold">{{ provider.full_name|default:provider.email }}</h2>
+      <p class="text-gray-600 text-sm">{{ provider.bio|default:"No bio available" }}</p>
+      <p class="text-xs text-gray-500 mt-2">
+        📞 {{ provider.phone }} | {{ provider.district }}, {{ provider.thana }}
+      </p>
+      <!-- ✅ average rating দেখানো -->
+      <p class="text-sm text-yellow-600 mt-1">⭐ Average Rating: {{ avg_rating|default:"No rating yet" }}</p>
+    </div>
+  </div>
+
+  <!-- Book Service -->
+  <div class="text-center">
+    <a href="{% url 'bookings:create_booking' service.id %}"
+       class="inline-block px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition">
+      Book This Service
+    </a>
+  </div>
+
+</div>
+{% endblock %}

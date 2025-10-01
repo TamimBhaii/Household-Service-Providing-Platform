@@ -1,0 +1,49 @@
+<!-- services/templates/services/service_list.html -->
+{% extends "base.html" %}
+{% block title %}Available Services{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 pt-24 pb-12">
+  <!-- Header + Search -->
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Available Services</h2>
+    <form method="get" action="{% url 'services:service_list' %}" class="flex w-full md:w-auto">
+      <input type="text" name="q" value="{{ q|default:'' }}"
+             placeholder="Search services..."
+             class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 outline-none">
+      <button class="px-6 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 transition">
+        Search
+      </button>
+    </form>
+  </div>
+
+  <!-- Services Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    {% for s in services %}
+      <div class="bg-white shadow-md hover:shadow-lg rounded-xl overflow-hidden transition transform hover:-translate-y-1">
+        {% if s.image %}
+          <img src="{{ s.image.url }}" alt="{{ s.title }}" class="w-full h-40 object-cover">
+        {% else %}
+          <div class="w-full h-40 bg-gray-200 flex items-center justify-center text-gray-500">
+            No Image
+          </div>
+        {% endif %}
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800 truncate">{{ s.title }}</h3>
+          <p class="text-sm text-gray-600 mb-2 line-clamp-2">{{ s.description|truncatechars:100 }}</p>
+          <p class="text-xs text-gray-500">Provider: {{ s.provider.full_name|default:s.provider.email }}</p>
+          <p class="text-xs text-gray-500">Location: {{ s.district }}{% if s.upazila %}, {{ s.upazila }}{% endif %}</p>
+          <div class="mt-4">
+            <a href="{% url 'services:service_detail' s.pk %}"
+               class="block text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+              View & Apply
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-gray-600">No services found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

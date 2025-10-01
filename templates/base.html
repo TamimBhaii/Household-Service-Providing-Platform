@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Household Service{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- ✅ Navbar -->
+  {% if request.resolver_match.url_name == "home" %}
+    <!-- Transparent Navbar for Home -->
+<nav class="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-10">
+  <a href="{% url 'home' %}">
+    <div class="flex items-center space-x-2">
+      <img src="{% static 'images/logo2.png' %}" alt="Logo" class="h-8 w-8">
+      <span class="text-2xl font-bold text-blue-600 drop-shadow-lg hover:text-blue-700 transition">
+        HouseHold Services
+      </span>
+    </div>
+  </a>
+
+  <div>
+    <a href="#about" 
+       class="px-4 py-2 bg-transparent border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition">
+       About Us
+    </a>
+  </div>
+</nav>
+
+  {% else %}
+    <!-- Normal Navbar -->
+    <nav class="flex justify-between items-center px-8 py-4 bg-white shadow">
+      <!-- Logo -->
+      <a href="{% url 'home' %}" class="flex items-center">
+        <img src="{% static 'images/logo2.png' %}" alt="Logo" class="h-8 w-8 mr-2">
+        <span class="text-xl font-bold text-blue-600 hover:text-blue-800">HouseHold Services</span>
+      </a>
+
+      <!-- Right side buttons -->
+      <div class="flex gap-6 items-center">
+        {% if user.is_authenticated %}
+          {% if user.is_provider %}
+            <a href="{% url 'accounts:dashboard' %}" class="hover:text-blue-600 font-semibold transition-colors">Dashboard</a>
+            <a href="{% url 'services:my_services' %}" class="hover:text-blue-600 font-semibold transition-colors">My Services</a>
+            <a href="{% url 'services:add_service' %}" class="hover:text-blue-600 font-semibold transition-colors">Add Service</a>
+            <a href="{% url 'bookings:provider_requests' %}" class="hover:text-blue-600 font-semibold transition-colors">Hire Requests</a>
+            <a href="{% url 'accounts:logout' %}" class="text-red-600 font-semibold hover:text-red-800 transition-colors">Logout</a>
+          {% elif user.is_customer %}
+            <a href="{% url 'accounts:dashboard' %}" class="hover:text-blue-600 font-semibold transition-colors">Dashboard</a>
+            <a href="{% url 'services:service_list' %}" class="hover:text-blue-600 font-semibold transition-colors">Available Services</a>
+            <a href="{% url 'accounts:my_bookings' %}" class="hover:text-blue-600 font-semibold transition-colors">My Bookings</a>
+            <a href="{% url 'bookings:booking_status' %}" class="hover:text-blue-600 font-semibold transition-colors">Status</a>
+            <a href="{% url 'accounts:logout' %}" class="text-red-600 font-semibold hover:text-red-800 transition-colors">Logout</a>
+          {% endif %}
+        {% else %}
+          {% if request.GET.role == "customer" or request.resolver_match.url_name == "customer_signup" %}
+            <a href="{% url 'accounts:login' %}?role=provider" 
+               class="px-4 bg-blue-600 text-white py-2 rounded-lg font-semibold shadow-md hover:bg-blue-700 transition">
+               Join as Professional
+            </a>
+          {% elif request.GET.role == "provider" or request.resolver_match.url_name == "provider_signup" %}
+            <a href="{% url 'accounts:login' %}?role=customer" 
+               class="px-4 bg-blue-600 text-white py-2 rounded-lg font-semibold shadow-md hover:bg-blue-700 transition">
+               Join as Customer
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </nav>
+  {% endif %}
+
+  <!-- ✅ Messages -->
+  {% if messages %}
+    <div class="max-w-2xl mx-auto mt-4 px-4">
+      {% for message in messages %}
+        <div class="p-3 rounded-lg mb-2 
+                    {% if message.tags == 'success' %} bg-green-100 text-green-700 
+                    {% elif message.tags == 'error' %} bg-red-100 text-red-700 
+                    {% else %} bg-blue-100 text-blue-700 {% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+
+  <!-- ✅ Footer -->
+  <footer id="about" class="bg-[#0f172a] text-white mt-16">
+    <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-10">
+
+      <!-- Column 1 -->
+      <div>
+        <h3 class="text-xl font-bold mb-3">HouseHold Services</h3>
+        <p class="text-gray-400 text-sm leading-6">
+          A trusted platform to <span class="text-indigo-400">book</span>, 
+          <span class="text-indigo-400">manage</span>, and 
+          <span class="text-indigo-400">provide</span> household services.  
+          Connecting professionals and customers securely & efficiently.
+        </p>
+      </div>
+
+      <!-- Column 2 -->
+      <div>
+        <h4 class="text-lg font-semibold mb-3">Quick Links</h4>
+        <ul class="space-y-2 text-gray-300 text-sm">
+          <li><a href="{% url 'services:service_list' %}" class="hover:text-indigo-400 transition">Available Services</a></li>
+          <li><a href="{% url 'accounts:edit_profile' %}" class="hover:text-indigo-400 transition">My Profile</a></li>
+          <li><a href="{% url 'terms' %}" class="hover:text-indigo-400 transition">Terms & Conditions</a></li>
+
+          <li><a href="{% url 'accounts:logout' %}" class="hover:text-indigo-400 transition">Logout</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3 -->
+      <div>
+        <h4 class="text-lg font-semibold mb-3">Stay Connected</h4>
+        <ul class="space-y-2 text-gray-300 text-sm">
+          <li><a href="https://www.instagram.com/ta_mim" target="_blank" class="hover:text-pink-400 transition">Instagram</a></li>
+          <li><a href="https://www.facebook.com/Tamim69Bhai" target="_blank" class="hover:text-blue-400 transition">Facebook</a></li>
+          <li><a href="https://x.com/TAMIMISLAM38" target="_blank" class="hover:text-sky-400 transition">X (Twitter)</a></li>
+          <li><a href="https://www.linkedin.com/in/tamimbhai" target="_blank" class="hover:text-blue-300 transition">LinkedIn</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4 -->
+      <div>
+        <h4 class="text-lg font-semibold mb-3">Support</h4>
+        <p class="text-gray-400 text-sm mb-3">
+          Need help? Click below to send us an email directly.
+        </p>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=eventmanagement.noreply@gmail.com" 
+           target="_blank"
+           class="block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-semibold transition">
+          📧 Send Email
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="border-t border-gray-700 text-center py-4 text-sm text-gray-400">
+      © {{ now|date:"Y" }} Household Service Platform. Crafted by Tamim Islam.
+    </div>
+  </footer>
+
+</body>
+</html>

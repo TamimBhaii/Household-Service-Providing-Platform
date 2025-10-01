@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Add Review{% endblock %}
+{% block content %}
+<div class="container mx-auto py-10 max-w-lg">
+  <h2 class="text-2xl font-bold mb-4">Leave a Review for {{ service.title }}</h2>
+
+  {% if messages %}
+    <div class="mb-4">
+      {% for message in messages %}
+        <p class="px-4 py-2 rounded 
+                  {% if message.tags == 'success' %}bg-green-100 text-green-700
+                  {% elif message.tags == 'error' %}bg-red-100 text-red-700
+                  {% else %}bg-gray-100 text-gray-700{% endif %}">
+          {{ message }}
+        </p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="POST" class="bg-white p-6 rounded shadow">
+    {% csrf_token %}
+    <label class="block mb-2 font-medium">Rating (1-5)</label>
+    <input type="number" name="rating" min="1" max="5"
+           class="w-full border p-2 rounded mb-4 shadow focus:ring focus:ring-blue-200" required>
+
+    <label class="block mb-2 font-medium">Comment</label>
+    <textarea name="comment" rows="4"
+              class="w-full border p-2 rounded mb-4 shadow focus:ring focus:ring-blue-200"></textarea>
+
+    <button type="submit"
+            class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+      Submit
+    </button>
+  </form>
+</div>
+{% endblock %}

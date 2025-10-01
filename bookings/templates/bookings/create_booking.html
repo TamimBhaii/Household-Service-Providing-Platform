@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Book Service{% endblock %}
+{% block content %}
+<div class="container mx-auto py-10 max-w-lg">
+  <h2 class="text-2xl font-bold mb-4">Book {{ service.title }}</h2>
+  <form method="POST" class="bg-white p-6 rounded shadow">
+    {% csrf_token %}
+    <label class="block mb-2">Note (optional)</label>
+    <textarea name="note" rows="3" class="w-full border p-2 rounded mb-4 shadow"></textarea>
+    <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded">Send Booking Request</button>
+  </form>
+</div>
+{% endblock %}
