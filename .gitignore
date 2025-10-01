@@ -14,10 +14,7 @@ env/
 
 # Django
 db.sqlite3
-/staticfiles
-/staticfiles/
-/media/
-media/
+
 
 # VSCode
 .vscode/
@@ -25,8 +22,6 @@ media/
 # Mac
 .DS_Store
 
-# Node (if present)
-node_modules/
 
 # Others
 *.log
