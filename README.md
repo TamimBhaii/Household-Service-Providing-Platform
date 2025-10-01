@@ -24,7 +24,6 @@ This platform connects **customers** with **service providers**, allowing bookin
 - 📊 See reviews given by customers
 
 ### 🛡 General Features:
-- 📱 Responsive design (works on mobile, tablet, laptop, and large monitors)
 - ☁️ **Cloudinary** integration for profile images and service images
 - 📂 Static files served via **Whitenoise**
 - 🎨 UI styled with **TailwindCSS**
