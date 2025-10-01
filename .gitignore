@@ -11,7 +11,8 @@ __pycache__/
 venv/
 ENV/
 env/
-
+staticfiles/
+media/
 # Django
 db.sqlite3
 
