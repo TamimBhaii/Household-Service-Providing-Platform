@@ -10,12 +10,12 @@ from bookings.models import Booking
 def add_review(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, customer=request.user)
 
-    # ✅ কেবল Accepted booking হলে review দিতে পারবে
+
     if booking.status != "accepted":
         messages.error(request, "❌ You can only review after your booking is accepted.")
         return redirect("bookings:booking_status")
 
-    # ✅ যদি আগে থেকে review থাকে → আর submit করতে দেবে না
+
     if Review.objects.filter(service=booking.service, customer=request.user).exists():
         messages.warning(request, "⚠ You have already submitted a review for this service.")
         return redirect("bookings:booking_status")

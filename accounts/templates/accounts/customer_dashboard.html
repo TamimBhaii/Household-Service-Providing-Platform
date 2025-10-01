@@ -2,7 +2,6 @@
 {% block title %}Customer Dashboard{% endblock %}
 {% block content %}
 <div class="max-w-3xl mx-auto pt-24 pb-10 text-center">
-  <!-- Profile Section -->
   <div class="bg-white shadow rounded-lg p-6 mb-8 flex flex-col items-center">
     {% if request.user.profile_image %}
       <img src="{{ request.user.profile_image.url }}" 
@@ -19,7 +18,6 @@
     <h2 class="text-2xl font-bold">{{ request.user.full_name|default:request.user.email }}</h2>
     <p class="text-gray-600 mb-6">Customer</p>
 
-    <!-- Action Buttons -->
     <div class="flex gap-4 justify-center">
       <a href="{% url 'accounts:edit_profile' %}" 
          class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">

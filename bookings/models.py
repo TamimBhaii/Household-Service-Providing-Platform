@@ -19,7 +19,7 @@ class Booking(models.Model):
     requested_datetime = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # snapshot of customer info
+   
     customer_name = models.CharField(max_length=200)
     customer_phone = models.CharField(max_length=30)
     customer_district = models.CharField(max_length=120, blank=True, null=True)

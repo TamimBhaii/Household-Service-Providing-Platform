@@ -5,7 +5,7 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
   <div class="w-full max-w-5xl flex bg-white rounded-lg shadow-lg overflow-hidden">
 
-    <!-- Left side image (white background, no shadow) -->
+    <!-- Left side image -->
     <div class="hidden md:flex w-1/2 items-center justify-center bg-white p-6">
       <img src="{% static 'images/signup.jpg' %}" alt="Signup" class="rounded-lg object-cover max-h-[500px] w-full">
     </div>
@@ -18,7 +18,7 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
 
-        <!-- full name -->
+       
         <div>
           {{ form.full_name }}
           {% if form.full_name.errors %}
@@ -26,7 +26,7 @@
           {% endif %}
         </div>
 
-        <!-- email + phone -->
+       
         <div>{{ form.email }}</div>
         <div>{{ form.phone }}</div>
 

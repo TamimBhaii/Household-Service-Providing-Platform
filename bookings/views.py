@@ -7,7 +7,7 @@ from django.views.decorators.http import require_POST
 
 from .models import Booking
 from services.models import Service
-from reviews.models import Review   # ✅ Added for review check
+from reviews.models import Review 
 
 
 @login_required
@@ -60,9 +60,6 @@ def update_status(request, booking_id, status):
     else:
         messages.error(request, "Invalid status.")
     return redirect("bookings:provider_requests")
-
-
-# ✅ Customer Status Page
 @login_required
 def booking_status(request):
     """Show all booking status for the logged in customer"""
@@ -70,15 +67,11 @@ def booking_status(request):
         return redirect("accounts:dashboard")
 
     bookings = Booking.objects.filter(customer=request.user).order_by("-created_at")
-
-    # ✅ Add extra flag: already_reviewed
     for b in bookings:
         b.already_reviewed = Review.objects.filter(service=b.service, customer=request.user).exists()
 
     return render(request, "bookings/status.html", {"bookings": bookings})
 
-
-# ✅ Provider Hire Requests Page
 @login_required
 def provider_requests(request):
     """Show all hire requests for the logged in provider"""

@@ -37,7 +37,6 @@ class Service(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
-    # ✅ duration in hours
     duration_hours = models.PositiveIntegerField(default=1)
 
     district = models.CharField(max_length=120, blank=True, null=True)

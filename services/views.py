@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.db.models import Avg   # ✅ added
+from django.db.models import Avg  
 
 from .models import Service, ServiceCategory
 from .forms import ServiceForm
@@ -27,7 +27,6 @@ def service_detail(request, pk):
     provider = service.provider
     rating = service.provider_rating()
 
-    # ✅ calculate avg rating for provider
     avg_rating = service.reviews.aggregate(Avg("rating"))["rating__avg"] or 0
     avg_rating = round(avg_rating, 1) if avg_rating else None
 
@@ -35,7 +34,7 @@ def service_detail(request, pk):
         "service": service,
         "provider": provider,
         "rating": rating,
-        "avg_rating": avg_rating,   # ✅ passed to template
+        "avg_rating": avg_rating,  
     })
 
 

@@ -11,9 +11,9 @@
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-  <!-- ✅ Navbar -->
+  <!-- Navbar -->
   {% if request.resolver_match.url_name == "home" %}
-    <!-- Transparent Navbar for Home -->
+
 <nav class="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-10">
   <a href="{% url 'home' %}">
     <div class="flex items-center space-x-2">
@@ -74,7 +74,7 @@
     </nav>
   {% endif %}
 
-  <!-- ✅ Messages -->
+  <!--  Messages -->
   {% if messages %}
     <div class="max-w-2xl mx-auto mt-4 px-4">
       {% for message in messages %}
@@ -90,7 +90,7 @@
 
   {% block content %}{% endblock %}
 
-  <!-- ✅ Footer -->
+  <!-- Footer -->
   <footer id="about" class="bg-[#0f172a] text-white mt-16">
     <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-10">
 

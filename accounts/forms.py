@@ -1,11 +1,9 @@
-# accounts/forms.py
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 
 User = get_user_model()
 
-# shared input classes (Tailwind)
 INPUT_CLASSES = (
     "w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md shadow-black/30 "
     "focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-gray-400"
@@ -212,8 +210,6 @@ class EditProfileForm(forms.ModelForm):
             ),
         }
 
-
-# ✅ Tailwind-styled Password Change Form
 class CustomPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(
         widget=forms.PasswordInput(

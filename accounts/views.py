@@ -11,7 +11,7 @@ from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetConfirmView
-from django.core.mail import EmailMultiAlternatives   # ✅ added
+from django.core.mail import EmailMultiAlternatives 
 
 from .forms import (
     CustomerSignUpForm,
@@ -24,8 +24,6 @@ from bookings.models import Booking
 
 User = get_user_model()
 
-
-# ✅ send activation email with HTML template
 def send_activation_email(request, user):
     subject = "Activate your account - Household Service Platform"
     uid = urlsafe_base64_encode(force_bytes(user.pk))
@@ -33,20 +31,18 @@ def send_activation_email(request, user):
     activate_url = request.build_absolute_uri(
         reverse("accounts:activate", kwargs={"uidb64": uid, "token": token})
     )
-
-    # HTML content
     html_message = render_to_string(
         "accounts/email/activation_email.html",
         {"user": user, "activate_url": activate_url},
     )
 
-    # Plain text fallback
+
     text_message = f"Hello {user.email},\nPlease activate your account: {activate_url}"
 
     email = EmailMultiAlternatives(
         subject=subject,
         body=text_message,
-        from_email=None,  # will use DEFAULT_FROM_EMAIL from settings
+        from_email=None, 
         to=[user.email],
     )
     email.attach_alternative(html_message, "text/html")
@@ -101,7 +97,7 @@ def activate_account(request, uidb64, token):
 
 
 def user_login(request):
-    role = request.GET.get("role", "customer")  # default customer
+    role = request.GET.get("role", "customer") 
     template = (
         "accounts/customer_login.html"
         if role == "customer"
@@ -176,7 +172,6 @@ def my_bookings(request):
     return render(request, "accounts/my_bookings.html", {"bookings": bookings})
 
 
-# ✅ Custom Password Change
 class CustomPasswordChangeView(PasswordChangeView):
     form_class = CustomPasswordChangeForm
     template_name = "accounts/password_change.html"

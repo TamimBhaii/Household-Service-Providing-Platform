@@ -55,7 +55,7 @@
           </div>
         {% endif %}
 
-        <!-- Link to full customer details -->
+     
         <div class="mt-4">
           <button onclick="toggleDetails('details-{{ booking.id }}')" 
                   class="text-blue-600 hover:text-blue-800 underline text-sm">
@@ -63,7 +63,7 @@
           </button>
         </div>
 
-        <!-- Hidden customer details -->
+      
         <div id="details-{{ booking.id }}" class="hidden mt-3 text-sm bg-gray-50 rounded-lg p-3 shadow-inner">
           <p><strong>Phone:</strong> {{ booking.customer_phone }}</p>
           <p><strong>District:</strong> {{ booking.customer_district }}</p>

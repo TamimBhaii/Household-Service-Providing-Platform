@@ -1,4 +1,3 @@
-# accounts/urls.py 
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
@@ -16,7 +15,7 @@ urlpatterns = [
     path("profile/edit/", views.edit_profile, name="edit_profile"),
     path("bookings/", views.my_bookings, name="my_bookings"),
 
-    # ✅ Password change
+
     path(
         "password_change/",
         views.CustomPasswordChangeView.as_view(),
@@ -29,14 +28,12 @@ urlpatterns = [
         ),
         name="password_change_done",
     ),
-
-    # ✅ Password reset (Forgot password)
     path(
         "password_reset/",
         auth_views.PasswordResetView.as_view(
             template_name="accounts/password_reset.html",
-            email_template_name="accounts/email/password_reset_email.txt",   # plain text fallback
-            html_email_template_name="accounts/email/password_reset_email.html",  # 🔑 HTML email
+            email_template_name="accounts/email/password_reset_email.txt", 
+            html_email_template_name="accounts/email/password_reset_email.html", 
             subject_template_name="accounts/password_reset_subject.txt",
             success_url=reverse_lazy("accounts:password_reset_done"),
         ),
