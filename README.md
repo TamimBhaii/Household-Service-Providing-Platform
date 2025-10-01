@@ -42,3 +42,5 @@ This platform connects **customers** with **service providers**, allowing bookin
 - **Version Control:** Git & GitHub
 
 ---
+###### Household Service Project  
+(Updated at: 2025-10-02)
