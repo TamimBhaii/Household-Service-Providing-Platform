@@ -2,6 +2,7 @@
 import os
 from pathlib import Path
 from decouple import config, Csv
+
 import cloudinary
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -57,8 +58,8 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "household.wsgi.application"
-ASGI_APPLICATION = "household.asgi.application"
+WSGI_APPLICATION = "household.wsgi.app"
+# ASGI_APPLICATION = "household.asgi.application"
 
 # Database from .env
 # DATABASES = {
@@ -71,6 +72,16 @@ ASGI_APPLICATION = "household.asgi.application"
 #         "PORT": config("DB_PORT", default="5432"),
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('dbname'),
+        'USER': config('user'),
+        'PASSWORD': config('password'),
+        'HOST': config('host'),
+        'PORT': config('port')
+    }
+}
 
 #neon database
 # DATABASES = {
@@ -122,8 +133,9 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
 
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
