@@ -12,7 +12,7 @@ venv/
 .venv
 ENV/
 env/
-staticfiles/
+
 media/
 # Django
 db.sqlite3
