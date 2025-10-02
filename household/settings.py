@@ -57,8 +57,8 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "household.wsgi.app"
-# ASGI_APPLICATION = "household.asgi.application"
+WSGI_APPLICATION = "household.wsgi.application"
+ASGI_APPLICATION = "household.asgi.application"
 
 # Database from .env
 # DATABASES = {
@@ -73,16 +73,16 @@ WSGI_APPLICATION = "household.wsgi.app"
 # }
 
 #neon database
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DB_NAME"),
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": config("DB_HOST"),
-        "PORT": config("DB_PORT", default="5432"),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": config("DB_NAME"),
+#         "USER": config("DB_USER"),
+#         "PASSWORD": config("DB_PASSWORD"),
+#         "HOST": config("DB_HOST"),
+#         "PORT": config("DB_PORT", default="5432"),
+#     }
+# }
 
 #postgreSQL for local
 # DATABASES = {
