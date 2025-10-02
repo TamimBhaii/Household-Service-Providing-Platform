@@ -57,8 +57,8 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "household.wsgi.application"
-ASGI_APPLICATION = "household.asgi.application"
+WSGI_APPLICATION = "household.wsgi.app"
+# ASGI_APPLICATION = "household.asgi.application"
 
 # Database from .env
 # DATABASES = {
