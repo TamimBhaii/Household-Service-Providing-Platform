@@ -43,4 +43,4 @@ This platform connects **customers** with **service providers**, allowing bookin
 
 ---
 ###### Household Service Project  
-(last Updated at: 2025-10-02)
+(last Updated at: 02-10-2025)
