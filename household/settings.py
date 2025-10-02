@@ -57,7 +57,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "household.wsgi.app"
+WSGI_APPLICATION = "household.wsgi.application"
 ASGI_APPLICATION = "household.asgi.application"
 
 # Database from .env
@@ -72,17 +72,29 @@ ASGI_APPLICATION = "household.asgi.application"
 #     }
 # }
 
-
+#neon database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'household_service_db', 
-        'USER': 'postgres',
-        'PASSWORD': '123456789',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    } 
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT", default="5432"),
+    }
 }
+
+#postgreSQL for local
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'household_service_db', 
+#         'USER': 'postgres',
+#         'PASSWORD': '123456789',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     } 
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
